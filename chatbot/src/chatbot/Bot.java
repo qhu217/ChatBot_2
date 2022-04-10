@@ -33,12 +33,30 @@ public class Bot {
 	static Twitter unauthenticatedTwitter = new TwitterFactory().getInstance();
     
     static String bearerToken = "AAAAAAAAAAAAAAAAAAAAAOXYbAEAAAAAksCXvXGmuVo%2BU%2Bpn%2Bphbvtc75lI%3DnTfOlqC2AWzGQ9K01Oonngey98o3Tqxuza9XsxSOr7Wc0govQv";
-	
-    //static String[] twitterAccounts = {"41713603","951133063165116418","780104972","141341662","23544596","846137120209190912","272985460", "23544268", "86993064"};
+	    
+    static String[] twitterUserIds = {"813286",
+    		"27260086",
+    		"21447363",
+    		"79293791",
+    		"155659213",
+    		"17919972",
+    		"14230524",
+    		"44196397",
+    		"18839785",
+    		"15846407",
+    		"10228272"};
     
-    static String[] twitterUserIds = {"22461427","846137120209190912","18637160","35206553","618593","809760","16303106"};
-    
-    static String[] twitterAccounts = {"@alyankovic","@dog_feelings","@EliBraden","@meganamram","@darthvader","@badbanana","@StephenAtHome"};
+    static String[] twitterAccounts = {"@BarackObama",
+    		"@justinbieber",
+    		"@katyperry",
+    		"@rihana",
+    		"@cristiano",
+    		"@taylorswift13",
+    		"@ladygaga",
+    		"@elonmusk",
+    		"@narendramodi",
+    		"@TheEllenShow",
+    		"@YouTube"};
     
 	// possible user input
 	static String[][] inputText = {
