@@ -12,6 +12,7 @@ import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.Span;
 
+import twitter4j.*;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -25,9 +26,6 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
 import Jwiki.Jwiki;
-import twitter4j.*;
-import twitter4j.conf.ConfigurationBuilder;
-
 
 public class Bot {
 	
