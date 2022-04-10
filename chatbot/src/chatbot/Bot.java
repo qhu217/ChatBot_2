@@ -26,6 +26,7 @@ import org.apache.http.util.EntityUtils;
 
 import Jwiki.Jwiki;
 import twitter4j.*;
+import twitter4j.conf.ConfigurationBuilder;
 
 
 public class Bot {
@@ -125,7 +126,7 @@ public class Bot {
     static String lastTopic = ""; 
     
 	//chatbot's favorites 	
-    static String[] favorites = {"'The Godfather'", "skiing", "ice cream", "'Pride and Prejudice'"};
+    static String[] favorites = {"The Godfather", "badminton", "steak", "Harry Potter"};
 
 	//user ending chat messages
     static String[] endText = {"bye", "see you", "bye bye", "see ya", "see u", "c u", "end"}; 
@@ -175,10 +176,7 @@ public class Bot {
     public static String getTweets(String userId, String bearerToken) throws IOException, URISyntaxException {
         String tweetResponse = null;
 
-        HttpClient httpClient = HttpClients.custom()
-            .setDefaultRequestConfig(RequestConfig.custom()
-                .setCookieSpec(CookieSpecs.STANDARD).build())
-            .build();
+        HttpClient httpClient = HttpClients.custom().setDefaultRequestConfig(RequestConfig.custom().setCookieSpec(CookieSpecs.STANDARD).build()).build();
 
         URIBuilder uriBuilder = new URIBuilder(String.format("https://api.twitter.com/2/users/%s/tweets", userId));
         ArrayList<NameValuePair> queryParameters = new ArrayList<>();
@@ -237,17 +235,20 @@ public class Bot {
     
     public static String getWiki(String s) {
     	Jwiki jwiki = new Jwiki(s); 
-    	return jwiki.getExtractText();
+    	String text = jwiki.getExtractText();
+    	String[] textArray = text.split("\\.");
+    	String response = "";
+    	if (textArray.length > 2) {
+    		for (int i = 0; i < 2; i++)
+    			response+=textArray[i];
+    		response+=".";
+    	}
+    	else
+    		response = text;
+    	return response;
         
     }
-    
-//    public static String JSONParser(String s) throws ParseException {
-//    	JSONParser parser = new JSONParser();
-//    	JSONObject jsonObject = (JSONObject)parser.parse(s);
-//    	String extractText = (String)jsonObject.get("extract");
-//    	return extractText; 
-//    }
-    
+
 	//get response to specific input
 	public String getChatbotResponse(String s) throws Exception {
 		if (!isQuit(s)) {
@@ -487,11 +488,11 @@ public class Bot {
 					lastTopic = topicKeyword[j];
 					int randomIndex = (int)Math.floor(Math.random()*(fav.length-1-0+1)+0);
 					if (randomIndex == 0)
-						answer = fav[0] + topicKeyword[j] + " is " + favorites[j] + "." + " Which " + topicKeyword[j] + " do you like the most?"; 
+						answer = fav[0] + topicKeyword[j] + " is " + favorites[j] + ". " + getWiki(favorites[j]) + " Which " + topicKeyword[j] + " do you like the most?"; 
 					else if (randomIndex == 1)
-						answer = fav[1] + favorites[j] + " the most." + " Which " + topicKeyword[j] + " do you like the most?"; 
+						answer = fav[1] + favorites[j] + " the most. " + getWiki(favorites[j]) + " Which " + topicKeyword[j] + " do you like the most?"; 
 					else if (randomIndex == 2)
-						answer = fav[2] + favorites[j]+ "." + " Which " + topicKeyword[j] + " do you like the most?"; 
+						answer = fav[2] + favorites[j]+ ". " + getWiki(favorites[j]) + " Which " + topicKeyword[j] + " do you like the most?"; 
 				}
 			}
 		}
@@ -692,7 +693,6 @@ public class Bot {
         
         // printing method for testing NER feature
         for(Span sp: personNameSpans) {
-        	//System.out.println("the name is " + sp.toString() + "  " + tokens[sp.getStart()]);
         	if (tokens[sp.getStart()] != null) {
         	userName = tokens[sp.getStart()]; 
         	}
@@ -754,7 +754,8 @@ public class Bot {
 				        personNER();
 				        locationNER();
 				        lemmatize(tokens, tags); 
-				      				        				        				        
+				      
+				        
 					System.out.print("Bot: \t");
 					System.out.println(generateResponse(s)); 
 					System.out.print("You: \t");
