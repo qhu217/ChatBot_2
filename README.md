@@ -1,5 +1,21 @@
-# ChatBot
-ChatBot for Assignment 2
+# ChatBot_Individual
+
+Qingyan (64356884)
+
+ChatBot for Individual Assignment
+
+---
+
+## API 1: Twitter API
+When user asks the chatbot to tell them something interesting, the chatbot will randomly respond with a most up-to-date tweet posted by a famous twitterer. By using the GET /2/tweets feature included in the Twitter API, I was able to retrieve a list of recent tweets posted by an author specified by the requested user ID. Then, I parsed the returned tweets and only kept the first one, i.e., the latest tweet from the person. Next, I extract the postdate, the author’s name, and tweet content from the string by using substring() method. Finally, I reordered these three fields and made the response straightforward and readable
+
+## API 2: Wikipedia API
+When user questions about the chatbot’s identity, the chatbot will first assure them about its identity as a chatbot, and then respond with a brief definition of the term “chatbot”.  Moreover, when user is curious about my hobbies (movies, books, sports, and foods), I will respond with my favorites together with a brief introduction extracted from Wikipedia using Wikipedia API by specifying the query term string. This method returns a title, an image URL, and an introduction. I extracted text from the introduction field as a string, parse it and only keep the first two sentences if the text was too long. Finally, I incorporated the text into my chatbot response to make it more substantial and variant. 
+
+
+<br>
+<br>
+<br>
 
 
 Project Description:
